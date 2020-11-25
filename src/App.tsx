@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {
+    ReactElement,
+    Suspense,
+} from 'react';
+import {
+    BrowserRouter as Switch,
+    Route,
+} from 'react-router-dom';
+import {
+    CountPage,
+    PostsPage,
+} from './pages';
+import ServiceLoader from './components/ServiceLoader';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App(): ReactElement {
+    return (
+        <Suspense fallback={<ServiceLoader />}>
+            <Switch>
+                <Route path="/count" component={CountPage} />
+                <Route path="/posts" component={PostsPage} />
+            </Switch>
+        </Suspense>
+    );
 }
 
 export default App;
